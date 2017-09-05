@@ -20,6 +20,6 @@ if __name__ == "__main__":
     s = sum(d)
     print len(d), s / 2
     if subset_sum(s / 2, d):
-        print "Exists"
+        print "Exists!"
     else:
-        print "Not possible"
+        print "Not possiblei."
