@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import random as rnd
+import sys
 
 
 def subset_sum(sum, set):
@@ -8,17 +9,14 @@ def subset_sum(sum, set):
     for i in range(len(t[:])):
         for j in range(len(t[i][:])):
             num = set[i]
-            # if num == j:
-            #    t[i][j] = 1
-            # else:
             t[i][j] = t[i - 1][j] if t[i - 1][j] else t[i - 1][j - num]
 
-    #pp.pprint(t)
     return t[-1][-1]
 
 
 if __name__ == "__main__":
-    d = [x * rnd.randint(1, 2500) for x in range(1, 2500)]
+    num = int(sys.argv[1])
+    d = [x * rnd.randint(1, 1000) for x in range(1, num+1)]
     s = sum(d)
     print len(d), s / 2
     if subset_sum(s / 2, d):

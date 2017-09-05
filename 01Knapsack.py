@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import pprint as pp
 import random as rnd
+import sys
+
+from datetime import datetime
 
 
 def knapsack(capacity, items):
@@ -28,13 +31,19 @@ def knapsack(capacity, items):
         if k[-i][l] == 1:
             s.append(items[it])
             l -= items[it][0]
-
     pp.pprint(s)
-    print "Total weight: %s\nTotal value: %s" % (sum(x[0] for x in s), sum(x[1] for x in s))
+    print "Optimal weight: %s\nOptimal value: %s\nOptimal # items: %s" % (sum(x[0] for x in s), sum(x[1] for x in s), len(s))
 
 
 if __name__ == "__main__":
-    d = [(x*rnd.randint(1,25),y*rnd.randint(10,150)) for x in range(1,25) for y in range(1,30)]
+    num_items = int(sys.argv[1])
+    rnd.seed(4096)
+    d = [(x*rnd.randint(1,150),y*rnd.randint(10,30)) for x in range(1, num_items) for y in range(1, num_items)]
     cap = sum(x[0] for x in d)
     print "Capacity: ", cap
-    knapsack(cap/2, d)
+    print "Items count: ", len(d)
+    startTime = datetime.now()
+
+    knapsack(cap/3, d)
+
+    print "Run time: ", datetime.now() - startTime
